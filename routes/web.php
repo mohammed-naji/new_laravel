@@ -3,6 +3,19 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\PortfolioController;
+
+// Portifolio routes
+Route::prefix('portfolio')->name('portfolio.')->group(function() {
+    Route::get('/', [PortfolioController::class, 'index'])->name('index');
+
+    Route::get('/about', [PortfolioController::class, 'about'])->name('about');
+
+    Route::get('/contact', [PortfolioController::class, 'contact'])->name('contact');
+});
+
+
+Route::get('/show', [PagesController::class, 'show']);
 
 Route::get('/home', [PagesController::class, 'home'])->name('home');
 Route::get('/about-us', [PagesController::class, 'about'])->name('about');
@@ -11,7 +24,7 @@ Route::get('/services', [PagesController::class, 'services'])->name('services');
 Route::get('/our-team', [PagesController::class, 'team'])->name('team');
 
 
-Route::get('/check/{name}', [PagesController::class, 'checkName'])->middleware('check');
+Route::get('/check/{name}', [PagesController::class, 'checkName'])->middleware('checkName');
 
 
 Route::get('/', function () {

@@ -8,7 +8,36 @@ class PagesController extends Controller
 {
 
     public function checkName($name) {
-        return 'Welcome ' . $name;
+        return 'Welcome Baby ' . $name;
+    }
+
+    public function show() {
+        // $name = 'Mohammed Naji';
+        // $age = 27;
+        // $edu = 'Master';
+
+        // $cars = ['BMW', 'MERCEDEC', 'OPEL', 'AUDI'];
+        // $cars = [];
+
+        $names = [
+            'Mohammed Naji' => 27,
+            'Feras' => 25,
+            'Mousa' => 26,
+            'Alaa' => 26
+        ];
+
+        // return view('show')->with('cars', $cars);
+        return view('pages.show')->with('names', $names);
+        // global $name;
+
+        // dd($GLOBALS['name']);
+        // return view('show')->with('myname', $name)->with('age', $age);
+        // return view('show', compact('name', 'age'));
+        // return view('show', [
+        //     'name'      => $name,
+        //     'age'       => $age,
+        //     'education' => $edu
+        // ]);
     }
 
     public function home() {

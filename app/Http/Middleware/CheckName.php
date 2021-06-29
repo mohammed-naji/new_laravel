@@ -16,15 +16,16 @@ class CheckName
      */
     public function handle(Request $request, Closure $next)
     {
+        // dd('This code from middleware');
+        // dd(strtolower($request->route()->parameter('name')));
+        if(strtolower($request->route()->parameter('name')) == 'zena') {
+            return $next($request);
+        }else {
+            return redirect('/');
+        }
+
         // dd($request->route()->parameter('name'));
-        // if($request->route()->parameter('name') == 'Feras') {
-        //     return $next($request);
-        // }else {
-        //     dd('You are not allowed to visit this page');
-        // }
 
-        return redirect()->route('home');
 
-        return $next($request);
     }
 }
