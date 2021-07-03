@@ -1,9 +1,13 @@
 <?php
 
+use App\Http\Controllers\FormController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\PortfolioController;
+
+Route::get('form', [FormController::class, 'form']);
+Route::post('form', [FormController::class, 'submitForm'])->name('submitForm');
 
 // Portifolio routes
 Route::prefix('portfolio')->name('portfolio.')->group(function() {
