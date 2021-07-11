@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Http\View\Composers\SocialMedialComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use App\Http\ViewComposer\GlobalVariable;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,7 +27,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer('portfolio.master',GlobalVariable::class);
+        Schema::defaultStringLength(191);
+        // View::composer('protfolio.master', SocialMedialComposer::class);
+        // View::composer('portfolio.master',GlobalVariable::class);
         // view()->share('fb', '##############');
     }
 }

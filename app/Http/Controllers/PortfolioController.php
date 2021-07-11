@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactUsMail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Mail;
 
 class PortfolioController extends Controller
 {
+    // public function index($lang = 'en') {
+
+    //     App::setLocale($lang);
+
     public function index() {
 
         $portfolios = [
@@ -35,5 +42,19 @@ class PortfolioController extends Controller
 
     public function contact() {
         return view('protfolio.contact');
+    }
+
+    public function contactSubmit(Request $request) {
+        $request->validate([
+            'fullname' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'message' => 'required',
+        ]);
+
+        $data = $request->except('_token');
+
+        Mail::to('admin@example.com')->send(new ContactUsMail($data));
+
     }
 }
