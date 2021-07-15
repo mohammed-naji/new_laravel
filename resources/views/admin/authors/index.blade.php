@@ -14,8 +14,8 @@
 
   <div class="container my-5">
   <div class="d-flex mb-4 justify-content-between align-items-center">
-    <h1 class="">All Posts</h1>
-    <a href="{{ route('posts.create') }}" class="btn btn-primary">Add New Post</a>
+    <h1 class="">All Authors</h1>
+    <a href="{{ route('authors.create') }}" class="btn btn-primary">Add New Author</a>
   </div>
     <style>
 
@@ -23,43 +23,48 @@ tbody, td, tfoot, th, thead, tr {
     vertical-align: middle
 }
     </style>
+
+@if (session('success'))
+<div class="alert alert-success">{{ session('success') }}</div>
+@endif
+
+@if (session('error'))
+<div class="alert alert-danger">{{ session('error') }}</div>
+@endif
+
     <table class="table">
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Image</th>
-      <th scope="col">Title</th>
-      <th scope="col">Content</th>
+      <th scope="col">Name</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
-  @forelse ($posts as $post)
+  @forelse ($authors as $author)
       <tr>
-        <th scope="row">{{ $loop->iteration }}</th>
-        <td><img width="80" src="{{ asset('uploads/'.$post->image) }}" alt=""></td>
-        <td>{{ $post->title }}</td>
-        <td>{{ $post->content }}</td>
+        <th scope="row">{{ $author->id }}</th>
+        <td>{{ $author->name }}</td>
         <td>
-            <a href="{{ route('posts.update', $post->id) }}" class="btn btn-info btn-sm">Edit</a>
-            <a href="{{ route('posts.destroy', $post->id) }}" class="btn btn-danger btn-sm">Delete</a>
-            {{-- <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="d-inline">
+            <a href="{{ route('authors.edit', $author->id) }}" class="btn btn-info btn-sm">Edit</a>
+            <form action="{{ route('authors.destroy', $author->id) }}" method="POST" class="d-inline">
                 @csrf
                 @method('delete')
-                <button class="btn btn-danger btn-sm">Delete</button>
-            </form> --}}
+                <button class="btn btn-danger btn-sm" onclick="return confirm('هل انت متأكد اخوي ؟؟؟')">Delete</button>
+            </form>
+
         </td>
     </tr>
 
     @empty
         <tr>
-            <td colspan="5">There is no posts found</td>
+            <td colspan="3">There is no data found</td>
         </tr>
   @endforelse
 
-
   </tbody>
 </table>
+{{ $authors->links() }}
   </div>
 
     <!-- Optional JavaScript; choose one of the two! -->

@@ -14,8 +14,8 @@
 
   <div class="container my-5">
   <div class="d-flex mb-4 justify-content-between align-items-center">
-    <h1 class="">Add new post</h1>
-    <a href="{{ route('posts.index') }}" class="btn btn-primary">Return Back</a>
+    <h1 class="">Add new Author</h1>
+    <a href="{{ route('authors.index') }}" class="btn btn-primary">Return Back</a>
   </div>
 
 
@@ -31,18 +31,18 @@
   @endif
 
 
-  <form method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+  @if (session('success'))
+      <div class="alert alert-success">{{ session('success') }}</div>
+  @endif
+
+  @if (session('error'))
+      <div class="alert alert-danger">{{ session('error') }}</div>
+  @endif
+
+  <form method="post" action="{{ route('authors.store') }}">
     @csrf
     <div class="mb-3">
-      <input type="text" placeholder="Title" class="form-control" name="title" />
-    </div>
-
-    <div class="mb-3">
-      <input type="file" class="form-control" name="image" />
-    </div>
-
-    <div class="mb-3">
-      <textarea placeholder="Content" class="form-control" name="content"></textarea>
+      <input type="text" placeholder="Author Name" class="form-control" name="name" />
     </div>
 
     <button class="btn btn-success w-100">Save</button>

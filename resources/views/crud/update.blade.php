@@ -14,7 +14,7 @@
 
   <div class="container my-5">
   <div class="d-flex mb-4 justify-content-between align-items-center">
-    <h1 class="">Add new post</h1>
+    <h1 class="">Update post</h1>
     <a href="{{ route('posts.index') }}" class="btn btn-primary">Return Back</a>
   </div>
 
@@ -31,21 +31,23 @@
   @endif
 
 
-  <form method="post" action="{{ route('posts.store') }}" enctype="multipart/form-data">
+  <form method="post" action="{{ route('posts.save',  $post->id) }}" enctype="multipart/form-data">
     @csrf
+    @method('put')
     <div class="mb-3">
-      <input type="text" placeholder="Title" class="form-control" name="title" />
+      <input type="text" value="{{ $post->title }}" placeholder="Title" class="form-control" name="title" />
     </div>
 
     <div class="mb-3">
       <input type="file" class="form-control" name="image" />
+      <img width="80" src="{{ asset('uploads/'.$post->image) }}" alt="">
     </div>
 
     <div class="mb-3">
-      <textarea placeholder="Content" class="form-control" name="content"></textarea>
+      <textarea placeholder="Content" class="form-control" name="content">{{ $post->content }}</textarea>
     </div>
 
-    <button class="btn btn-success w-100">Save</button>
+    <button class="btn btn-info w-100">Update</button>
 
   </form>
 
