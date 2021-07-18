@@ -1,25 +1,55 @@
 <?php
 
-use App\Http\Controllers\AuthorController;
+use App\Models\User;
 use App\Mail\TestMail;
 use App\Mail\WelcomeMail;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FormController;
 use App\Http\Controllers\SQLController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\PagesController;
-use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\RelationController;
+use App\Http\Controllers\Auth\HomeController;
+use App\Http\Controllers\PortfolioController;
+use Prophecy\Doubler\Generator\Node\ReturnTypeNode;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+/*
+composer require laravel/ui
+php artisan ui bootstrap --auth
+npm install "twice"
+npm run dev "twice"
+*/
 
+Route::get('/', function(){
+    return view('welcome');
+});
+
+Route::get('test', function(){
+    return 'test';
+})->middleware('auth');
+
+// Route::get('login', function() {
+//     return view('auth.login');
+// })->name('login');
+
+// Route::post('login', function(Request $request ) {
+
+//     // $user = User::where('email', $request->email)->get();
+
+//     // return $user;
+
+//     Auth::attempt(['email' => $request->email, 'password' => $request->password]);
+
+// });
 
 Route::get('relation', [RelationController::class, 'index']);
-
-
 
 
 
@@ -144,3 +174,12 @@ Route::resource('authors', AuthorController::class);
 // Route::get('/countries/{city?}', function($city = '') {
 //     return $city . ' <br>All Countries';
 // });
+
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
+Route::get('/admin', function() {
+    return 'صفحة الادمن علشان الجماعة ما تزعل منا';
+});
